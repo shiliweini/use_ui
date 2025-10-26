@@ -1,0 +1,14 @@
+name: Notify Feishu on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Feishu
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d "{\"msg_type\":\"text\",\"content\":{\"text\":\"🚀 代码已推送到 main 分支！\"}}" ${{ secrets.FEISHU_WEBHOOK_URL }}
